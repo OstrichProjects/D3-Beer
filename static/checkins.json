@@ -1,0 +1,682 @@
+[
+  {
+    "style": "Belgian Quad", 
+    "name": "Three Philosophers", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Brewery Ommegang", 
+    "abv": 9.7, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "American Brown Ale", 
+    "name": "Brown Ale", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Brooklyn Brewery", 
+    "abv": 5.6, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Belgian Strong Dark Ale", 
+    "name": "Art Of Darkness", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Brewery Ommegang", 
+    "abv": 8.9, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "American Pale Ale", 
+    "name": "Sensi Harvest", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Sixpoint Brewery", 
+    "abv": 4.7, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Belgian Strong Dark Ale", 
+    "name": "Salvation", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Russian River Brewing Company", 
+    "abv": 9.5, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Imperial / Double IPA", 
+    "name": "Pliny the Elder", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Russian River Brewing Company", 
+    "abv": 8, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Imperial / Double IPA", 
+    "name": "Pliny the Elder", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Russian River Brewing Company", 
+    "abv": 8, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Bock", 
+    "name": "Samuel Adams Chocolate Bock", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Boston Beer Company (Samuel Adams)", 
+    "abv": 5.8, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Imperial / Double IPA", 
+    "name": "Stone Enjoy By 12.26.14 IPA", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Stone Brewing Co.", 
+    "abv": 9.4, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Oatmeal Stout", 
+    "name": "Otis", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Sixpoint Brewery", 
+    "abv": 6.1, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Belgian Strong Dark Ale", 
+    "name": "Mad Elf (2014)", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Tr\u00f6egs Brewing Company", 
+    "abv": 11, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Milk / Sweet Stout", 
+    "name": "2X Stout (Double Milk Stout)", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Southern Tier Brewing Company", 
+    "abv": 7.5, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Winter Ale", 
+    "name": "UFO Gingerland", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Harpoon Brewery", 
+    "abv": 5.2, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Oatmeal Stout", 
+    "name": "Farmer Jon's Oatmeal Stout", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Heartland Brewery", 
+    "abv": 6, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Saison / Farmhouse Ale", 
+    "name": "1/2 Ale", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Brooklyn Brewery", 
+    "abv": 3.4, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Witbier", 
+    "name": "Heyday", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Great Divide Brewing Company", 
+    "abv": 5.2, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Winter Ale", 
+    "name": "UFO Gingerland", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Harpoon Brewery", 
+    "abv": 5.2, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Imperial / Double Red Ale", 
+    "name": "Global Warmer", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Sixpoint Brewery", 
+    "abv": 7, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "American IPA", 
+    "name": "Stone Go To IPA", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Stone Brewing Co.", 
+    "abv": 4.5, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "English Pale Ale", 
+    "name": "Brooklyn Pennant Ale '55", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Brooklyn Brewery", 
+    "abv": 5, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "American Porter", 
+    "name": "Vanilla Porter", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Breckenridge Brewery", 
+    "abv": 4.7, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Extra Special/Strong Bitter", 
+    "name": "Sawtooth Nitro", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Left Hand Brewing Company", 
+    "abv": 5.3, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "American Imperial / Double Stout", 
+    "name": "Breakfast Stout", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Founders Brewing Co.", 
+    "abv": 8.3, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "American Pale Ale", 
+    "name": "Sensi Harvest", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Sixpoint Brewery", 
+    "abv": 4.7, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "American IPA", 
+    "name": "Bouncy House IPA", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Smuttynose Brewing Co.", 
+    "abv": 4.3, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "American Pale Ale", 
+    "name": "Pale Ale", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Sierra Nevada Brewing Co.", 
+    "abv": 5.6, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "American Pale Ale", 
+    "name": "Pale Ale", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Sierra Nevada Brewing Co.", 
+    "abv": 5.6, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "American Stout", 
+    "name": "JavaHead Stout", 
+    "venue-city": "Albany", 
+    "brewer-country": "United States", 
+    "brewery": "Tr\u00f6egs Brewing Company", 
+    "abv": 7.5, 
+    "ibu": null, 
+    "venue-country": "United States"
+  }, 
+  {
+    "style": "American Pale Ale", 
+    "name": "Pale Ale", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Sierra Nevada Brewing Co.", 
+    "abv": 5.6, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Milk / Sweet Stout", 
+    "name": "Milk Stout Nitro", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Left Hand Brewing Company", 
+    "abv": 6, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Milk / Sweet Stout", 
+    "name": "Milk Stout Nitro", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Left Hand Brewing Company", 
+    "abv": 6, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Belgian Dubbel", 
+    "name": "Game Of Thrones - Valar Morghulis", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Brewery Ommegang", 
+    "abv": 8, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Radler", 
+    "name": "Rad", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Sixpoint Brewery", 
+    "abv": 3.2, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Oktoberfest/M\u00e4rzen", 
+    "name": "Spaten Oktoberfestbier / Oktoberfest Ur-M\u00e4rzen", 
+    "venue-city": "Albany", 
+    "brewer-country": "Germany", 
+    "brewery": "Spaten-Franziskaner-L\u00f6wenbr\u00e4u-Gruppe", 
+    "abv": 5.9, 
+    "ibu": null, 
+    "venue-country": "United States"
+  }, 
+  {
+    "style": "Hefeweizen", 
+    "name": "Franziskaner Hefe-Weissbier Naturtr\u00fcb", 
+    "venue-city": "Albany", 
+    "brewer-country": "Germany", 
+    "brewery": "Spaten-Franziskaner-L\u00f6wenbr\u00e4u-Gruppe", 
+    "abv": 5, 
+    "ibu": null, 
+    "venue-country": "United States"
+  }, 
+  {
+    "style": "Pumpkin / Yam Beer", 
+    "name": "Pumking (2014)", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Southern Tier Brewing Company", 
+    "abv": 8.6, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Pumpkin / Yam Beer", 
+    "name": "Pumpkin Wheat", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Shock Top Brewing Co.", 
+    "abv": 5.1, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Pumpkin / Yam Beer", 
+    "name": "Pumking (2014)", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Southern Tier Brewing Company", 
+    "abv": 8.6, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "American IPA", 
+    "name": "All Day IPA (Session Ale)", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Founders Brewing Co.", 
+    "abv": 4.7, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Hefeweizen", 
+    "name": "Franziskaner Hefe-Weissbier Naturtr\u00fcb", 
+    "venue-city": "Albany", 
+    "brewer-country": "Germany", 
+    "brewery": "Spaten-Franziskaner-L\u00f6wenbr\u00e4u-Gruppe", 
+    "abv": 5, 
+    "ibu": null, 
+    "venue-country": "United States"
+  }, 
+  {
+    "style": "Irish Dry Stout", 
+    "name": "O'Hara's Irish Stout", 
+    "venue-city": "Albany", 
+    "brewer-country": "Ireland", 
+    "brewery": "O'Hara's Brewery (Carlow Brewing Company)", 
+    "abv": 4.3, 
+    "ibu": null, 
+    "venue-country": "United States"
+  }, 
+  {
+    "style": "Pumpkin / Yam Beer", 
+    "name": "Wilhelm Scream", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Magic Hat Brewing Company", 
+    "abv": 5.4, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "American IPA", 
+    "name": "All Day IPA (Session Ale)", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Founders Brewing Co.", 
+    "abv": 4.7, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Pumpkin / Yam Beer", 
+    "name": "Pumpkinhead Ale", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Shipyard Brewing Company", 
+    "abv": 4.5, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Witbier", 
+    "name": "White Aphro", 
+    "venue-city": "Astoria", 
+    "brewer-country": "United States", 
+    "brewery": "Empire Brewing Company", 
+    "abv": 6.3, 
+    "ibu": null, 
+    "venue-country": "United States"
+  }, 
+  {
+    "style": "American IPA", 
+    "name": "IPA", 
+    "venue-city": "Astoria", 
+    "brewer-country": "United States", 
+    "brewery": "Lagunitas Brewing Company", 
+    "abv": 6.2, 
+    "ibu": null, 
+    "venue-country": "United States"
+  }, 
+  {
+    "style": "American IPA", 
+    "name": "Brew Free! or Die IPA", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "21st Amendment Brewery ", 
+    "abv": 7, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Czech Pilsener", 
+    "name": "Summerfest", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Sierra Nevada Brewing Co.", 
+    "abv": 5, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Oatmeal Stout", 
+    "name": "Nitro Oatmeal Stout", 
+    "venue-city": "New York", 
+    "brewer-country": "United States", 
+    "brewery": "Founders Brewing Co.", 
+    "abv": 4.5, 
+    "ibu": null, 
+    "venue-country": "United States"
+  }, 
+  {
+    "style": "Fruit Beer", 
+    "name": "Hell or High Watermelon", 
+    "venue-city": "New York", 
+    "brewer-country": "United States", 
+    "brewery": "21st Amendment Brewery ", 
+    "abv": 4.9, 
+    "ibu": null, 
+    "venue-country": "United States"
+  }, 
+  {
+    "style": "Oatmeal Stout", 
+    "name": "Nitro Oatmeal Stout", 
+    "venue-city": "New York", 
+    "brewer-country": "United States", 
+    "brewery": "Founders Brewing Co.", 
+    "abv": 4.5, 
+    "ibu": null, 
+    "venue-country": "United States"
+  }, 
+  {
+    "style": "Vienna Lager", 
+    "name": "Samuel Adams Boston Lager\u00ae", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Boston Beer Company (Samuel Adams)", 
+    "abv": 4.7, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "American IPA", 
+    "name": "All Day IPA (Session Ale)", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Founders Brewing Co.", 
+    "abv": 4.7, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "American IPA", 
+    "name": "Red Wagon IPA", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Fire Island Beer Company", 
+    "abv": 6.5, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "American Amber / Red Ale", 
+    "name": "Lobster Ale", 
+    "venue-city": "New York", 
+    "brewer-country": "United States", 
+    "brewery": "Belfast Bay Brewing Company", 
+    "abv": 5, 
+    "ibu": null, 
+    "venue-country": "United States"
+  }, 
+  {
+    "style": "American Pale Wheat Ale", 
+    "name": "Summer Session Ale", 
+    "venue-city": "New York", 
+    "brewer-country": "United States", 
+    "brewery": "Peak Organic Brewing Company", 
+    "abv": 5, 
+    "ibu": null, 
+    "venue-country": "United States"
+  }, 
+  {
+    "style": "Golden Ale", 
+    "name": "Summer Love", 
+    "venue-city": "New York", 
+    "brewer-country": "United States", 
+    "brewery": "Victory Brewing Company", 
+    "abv": 5.2, 
+    "ibu": null, 
+    "venue-country": "United States"
+  }, 
+  {
+    "style": "Belgian Strong Pale Ale", 
+    "name": "Local 1", 
+    "venue-city": "Brooklyn", 
+    "brewer-country": "United States", 
+    "brewery": "Brooklyn Brewery", 
+    "abv": 9, 
+    "ibu": null, 
+    "venue-country": "United States"
+  }, 
+  {
+    "style": "Saison / Farmhouse Ale", 
+    "name": "Ridgy Didge", 
+    "venue-city": "Brooklyn", 
+    "brewer-country": "United States", 
+    "brewery": "Brooklyn Brewery", 
+    "abv": 8.4, 
+    "ibu": null, 
+    "venue-country": "United States"
+  }, 
+  {
+    "style": "Imperial / Double IPA", 
+    "name": "Brooklyn Blast!", 
+    "venue-city": "Brooklyn", 
+    "brewer-country": "United States", 
+    "brewery": "Brooklyn Brewery", 
+    "abv": 8.4, 
+    "ibu": null, 
+    "venue-country": "United States"
+  }, 
+  {
+    "style": "English Pale Ale", 
+    "name": "Summer Ale", 
+    "venue-city": "Brooklyn", 
+    "brewer-country": "United States", 
+    "brewery": "Brooklyn Brewery", 
+    "abv": 5, 
+    "ibu": null, 
+    "venue-country": "United States"
+  }, 
+  {
+    "style": "American Pale Ale", 
+    "name": "Patriot Ale", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Patriot Saloon", 
+    "abv": 0, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "American Pale Ale", 
+    "name": "Pale Ale", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Sierra Nevada Brewing Co.", 
+    "abv": 5.6, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Milk / Sweet Stout", 
+    "name": "Milk Stout", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "The Duck-Rabbit Craft Brewery", 
+    "abv": 5.7, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Cream Ale", 
+    "name": "Nanook's Revenge Winter Wassail", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Outer Banks Brewing Station", 
+    "abv": 8.3, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "Porter", 
+    "name": "Briny Deep Oyster Porter", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Outer Banks Brewing Station", 
+    "abv": 7.3, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "American Pale Ale", 
+    "name": "Polarity Pale Alr", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Outer Banks Brewing Station", 
+    "abv": 7.1, 
+    "ibu": null, 
+    "venue-country": null
+  }, 
+  {
+    "style": "K\u00f6lsch", 
+    "name": "Olsch", 
+    "venue-city": null, 
+    "brewer-country": "United States", 
+    "brewery": "Outer Banks Brewing Station", 
+    "abv": 4.8, 
+    "ibu": null, 
+    "venue-country": null
+  }
+]

@@ -1,0 +1,62 @@
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Montserrat-Regular'), url(http://fonts.gstatic.com/s/montserrat/v6/zhcz-_WihjSQC0oHJ9TCYPk_vArhqVIZ0nv9q090hN8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+*{
+  margin: 0;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #333333;
+  position: relative;
+  text-align: center;
+  background-color: #FDF8F2;
+  width: 100%;
+}
+h1 {
+  text-align: center;
+  font-weight: normal;
+  font-size: 50px;
+  margin: 10px 0;
+}
+label {
+  margin-right: 10px;
+}
+input {
+  margin-left: 5px;
+}
+#pint {
+  position: absolute;
+  top: 0;
+  z-index: 50;
+}
+#vis {
+  position: relative;
+  margin: 0 auto;
+  width: 350px;
+}
+.overlay {
+  position: absolute;
+  z-index: 60;
+  top: 0;
+  left: 0;
+}
+.label {
+  position: absolute;
+  left: 350px;
+  background-color: #F79400;
+  padding: 2px 6px;
+}
+#footer {
+  padding: 5px 5px;
+  text-align: right;
+  bottom: 0;
+}

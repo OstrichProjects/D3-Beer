@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Beer</title>
+<link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div id="layout">
+    <a href="https://github.com/pezholio/beer-goggles"><img style="position: absolute; top: -10px; right: 0px; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
+
+    <h1>Beer Goggles</h1>
+    <p>A D3 visualisation of all the beer I've drunk since 2012</p>
+    <h2>View by</h2>
+    <p>
+      <label>Style <input type="radio" name="view" class="view" value="style" checked="checked" /></label>
+      <label>Brewery <input type="radio" name="view" class="view" value="brewery" /></label>
+      <label>Country <input type="radio" name="view" class="view" value="brewer-country" /></label>
+    </p>
+    <div id="vis">
+      <img src="{{ url_for('static', filename='pint.png') }}" id="pint" alt="" />
+      <svg class="chart"></svg>
+      <svg class="overlay"></svg>
+    </div>
+    <div id="footer">
+      <a href="https://untappd.com">
+        <img src="{{ url_for('static', filename='poweredbyuntappd_b_grey_small.png') }}" alt="Powered by Untappd" />
+      </a>
+    </div>
+  </div>
+<script src="{{ url_for('static', filename='d3.v3.min.js') }}"></script>
+<script src="{{ url_for('static', filename='beer-visualization.js') }}"></script>
+</body>
+</html>
