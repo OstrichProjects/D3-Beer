@@ -2,3 +2,4 @@ _site
 .~lock.checkins.csv#
 app_constants_dev.py
 *.pyc
+flask/

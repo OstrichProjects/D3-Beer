@@ -64,7 +64,7 @@ def beers():
         beer_list.append(beer)
     return json.dumps(beer_list)
 
-@app.route('/test-beers')
+@app.route('/login-beers')
 def test_beers():
     return send_from_directory('./static', 'checkins.json')
 

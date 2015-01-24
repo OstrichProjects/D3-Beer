@@ -2,8 +2,34 @@
 <html>
 <head>
 <title>Beer</title>
+<link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet" type="text/css">
 </head>
 <body>
-<a href = "/login">Login to Untappd</a>
+  <div id="layout">
+    <a href="https://github.com/OstrichProjects/D3-Beer"><img style="position: absolute; top: 0px; right: 0px; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_black_ff7600.png"></a>
+
+    <h1>D3 Beer</h1>
+    <p>Visualize your beer checkins from Untappd!</p>
+    <p>Forked from <a href="http://blog.pezholio.co.uk/beer-goggles/" target="_blank">Pezholio</a></p>
+    <div id="login"><a href="/login"><span>Login to </span><img src="{{ url_for('static', filename='untappd.png') }}" alt="Untappd" /><span>to view yours!</span></a></div>
+    <h2>View by</h2>
+    <div class="select">
+      <span><button class="view active" value="style">Style</button></span>
+      <span><button class="view" value="brewery">Brewery</button></span>
+      <span><button class="view" value="brewer-country">Country</button></span>
+    </div>
+    <div id="vis">
+      <img src="{{ url_for('static', filename='pint.png') }}" id="pint" alt="" />
+      <svg class="chart"></svg>
+      <svg class="overlay"></svg>
+    </div>
+    <div id="footer">
+      <a href="https://untappd.com">
+        <img src="{{ url_for('static', filename='poweredbyuntappd_b_grey_small.png') }}" alt="Powered by Untappd" />
+      </a>
+    </div>
+  </div>
+<script src="{{ url_for('static', filename='d3.v3.min.js') }}"></script>
+<script src="{{ url_for('static', filename='beer-visualization.js') }}"></script>
 </body>
 </html>

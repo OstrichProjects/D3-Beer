@@ -6,18 +6,20 @@
 </head>
 <body>
   <div id="layout">
-    <a href="https://github.com/pezholio/beer-goggles"><img style="position: absolute; top: -10px; right: 0px; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
+    <a href="https://github.com/OstrichProjects/D3-Beer"><img style="position: absolute; top: 0px; right: 0px; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_black_ff7600.png"></a>
 
-    <h1>Beer Goggles</h1>
-    <p>A D3 visualisation of all the beer I've drunk since 2012</p>
+    <h1>D3 Beer</h1>
+    <p>Visualize your beer checkins from Untappd!</p>
+    <p>Forked from <a href="http://blog.pezholio.co.uk/beer-goggles/" target="_blank">Pezholio</a></p>
     <h2>View by</h2>
-    <p>
-      <label>Style <input type="radio" name="view" class="view" value="style" checked="checked" /></label>
-      <label>Brewery <input type="radio" name="view" class="view" value="brewery" /></label>
-      <label>Country <input type="radio" name="view" class="view" value="brewer-country" /></label>
-    </p>
+    <div class="select">
+      <span><button class="view active" value="style">Style</button></span>
+      <span><button class="view" value="brewery">Brewery</button></span>
+      <span><button class="view" value="brewer-country">Country</button></span>
+    </div>
     <div id="vis">
       <img src="{{ url_for('static', filename='pint.png') }}" id="pint" alt="" />
+      <img src="{{ url_for('static', filename='loading-bars.svg') }}" id="load" alt="" />
       <svg class="chart"></svg>
       <svg class="overlay"></svg>
     </div>

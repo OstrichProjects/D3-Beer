@@ -1,31 +1,49 @@
-var colourScale = d3.scale.category20b();
-
 var width = 330
-    height = 540;
+    height = 495;
 
 var y = d3.scale.linear()
     .range([0, height]);
 
 var chart = d3.select(".chart")
     .attr("width", width)
-    .attr("height", height)
+    .attr("height", height + 45)
     .append("g")
-    .attr("transform", "translate(0,45)");
+    .attr("transform", "translate(0,45)")
+    .attr("height", height);
 
 var overlay = d3.select(".overlay")
     .attr("width", width)
-    .attr("height", height)
+    .attr("height", height + 45)
     .append("g")
-    .attr("transform", "translate(0,45)");
+    .attr("transform", "translate(0,45)")
+    .attr("height", height);
 
 var label = d3.select("#vis").append("div")
     .attr("class", "label")
     .style("opacity", 0);
 
-var url = "/test-beers"
+if (document.getElementById("login")) {
+    var url = "/login-beers";
+} else {
+    var url = "/beers";
+}
 
-function loadChart(type) {
-    d3.json(url, function(error, data) {
+
+d3.json(url)
+    .on("error", function(e) { alert("You've ran out of API requests for the hour :("); })
+    .on("load", function(data) {
+    
+    d3.select("#load").remove();
+
+    d3.selectAll(".view").on('click', function(){
+        d3.selectAll(".view").attr("class", "view");
+        d3.select(this).attr("class", "view active");
+        loadChart(this.value);
+    });
+
+    loadChart("style");
+
+    function loadChart(type) {
         // Remove previous svg elements
         chart.selectAll("*").remove();
         overlay.selectAll("*").remove();
@@ -34,32 +52,46 @@ function loadChart(type) {
         total = 0;
         total = data.map(function(e) { total += 1 });
         
-        // Creates Others object for selections with less than 2 entries
-        others = {
-            key: "Others",
-            value: 0
-        };
-    
-        // Maps the category entries into key name and length, adds to others if length < 2
-        checkins = d3.nest()
-            .key(function(d) {return d[type]})
-            .entries(data)
-            .map(function(c) {
-                if (c.values.length > 1) {
-                    return {
-                        key: c.key,
-                        value: c.values.length
-                    }
-                } else {
-                    others.value += c.values.length
-                    return null
-                }
-            })
-            .filter(function(c) { return c != null })
-            .sort(function(a,b) { return b.value - a.value });
+        var cutoff = 0;
 
+        while (true) {
+            // Creates Others object for selections with less than 2 entries
+            others = {
+                key: "Others",
+                value: 0
+            };
+
+            // Maps the category entries into key name and length, adds to others if length < 2
+            var checkins = d3.nest()
+                .key(function(d) {return d[type]})
+                .entries(data)
+                .map(function(c) {
+                    if (c.values.length > cutoff) {
+                        return {
+                            key: c.key,
+                            value: c.values.length
+                        }
+                    } else {
+                        others.value += c.values.length
+                        return null
+                    }
+                })
+                .filter(function(c) { return c != null })
+                .sort(function(a,b) { return b.value - a.value });
+
+            if (Object.keys(checkins).length > 19) {
+                cutoff += 1
+            } else { break; }
+        }
         // Push others into Checkin object
         checkins.push(others);
+
+        // Use more varied color scale if # categories is < 6
+        if (Object.keys(checkins).length > 5) {
+            var colourScale = d3.scale.category20b();
+        } else {
+            var colourScale = d3.scale.category10();
+        }
 
         y.domain([0, data.length]);
         var y0 = 0;
@@ -73,6 +105,8 @@ function loadChart(type) {
             }
         });
 
+
+
         chart.selectAll(".bar")
             .data(checkins)
             .enter().append("rect")
@@ -81,8 +115,8 @@ function loadChart(type) {
             .attr("y", function(d) { return d.y0; })
             .attr("height", function(d) { return y(d.value); })
             .attr("width", width)
-            .attr("title", function(d) { return d.key })
-            .attr("fill", function(d,i) { return colourScale(i) });
+            .attr("title", function(d) { return d.key; })
+            .attr("fill", function(d,i) { return colourScale(i); });
         
         overlay.selectAll(".bar")
             .data(checkins)
@@ -116,12 +150,6 @@ function loadChart(type) {
             .transition()
             .duration(2000)
             .attr("height", 0)
-    });
-}
-
-(function() {
-  loadChart('style');
-  d3.selectAll(".view").on('click', function(){
-    loadChart(this.value)
-  });
-})();
+    }
+    })
+    .get();
