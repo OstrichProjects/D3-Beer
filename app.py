@@ -78,7 +78,9 @@ def authorize():
         code = request.args.get('code')
     except KeyError:
         return redirect(url_for('index'))
-     
+    
+    return redirect(url_for('index'))
+
     params = {
         'client_id': UNTAPPD_CLIENT_ID,
         'client_secret': UNTAPPD_CLIENT_SECRET,
