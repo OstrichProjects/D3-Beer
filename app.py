@@ -41,13 +41,17 @@ def beers():
     params = {'access_token': g.access_token, 'limit': 50}
     UNTAPPD_URL = "https://api.untappd.com/v4/user/checkins/"
     beer_list_untappd = []
+    a = 0
     while True:
+        if a > 49:
+            break
         r = requests.get(UNTAPPD_URL, params = params)
         if r.json()[u'response'][u'checkins'][u'count'] > 0:
             beer_list_untappd += r.json()[u'response'][u'checkins'][u'items']
         if r.json()[u'response'][u'checkins'][u'count'] < 50:
             break
         params['max_id'] = r.json()[u'response'][u'pagination'][u'max_id']
+        a += 1
     beer_list = []
     for beer_untappd in beer_list_untappd:
         beer = {
