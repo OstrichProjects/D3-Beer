@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session, g, send_from_directory
 import requests
 import json
-from untappd_api_keys import UNTAPPD_CLIENT_ID, UNTAPPD_CLIENT_SECRET, UNTAPPD_REDIRECT_URL
+from app_constant_dev import UNTAPPD_CLIENT_ID, UNTAPPD_CLIENT_SECRET, UNTAPPD_REDIRECT_URL
 
 # Init Flask App
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'SECRET_KEY_HERE'
+app.config['SECRET_KEY'] = 'I Like big beers'
 app.debug = True
 
 @app.before_request
