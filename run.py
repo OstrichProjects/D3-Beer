@@ -6,7 +6,7 @@ from app_constant_dev import UNTAPPD_CLIENT_ID, UNTAPPD_CLIENT_SECRET, UNTAPPD_R
 # Init Flask App
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'I Like big beers'
-app.debug = True
+app.debug = False
 
 @app.before_request
 def load_access_token():
