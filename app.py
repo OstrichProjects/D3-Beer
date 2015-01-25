@@ -1,12 +1,14 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session, g, send_from_directory
 import requests
 import json
+import logging
 from untappd import UNTAPPD_CLIENT_ID, UNTAPPD_CLIENT_SECRET, UNTAPPD_REDIRECT_URL
 
 # Init Flask App
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'I Like big beers'
-app.debug = True
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
 
 @app.before_request
 def load_access_token():
@@ -78,8 +80,6 @@ def authorize():
         code = request.args.get('code')
     except KeyError:
         return redirect(url_for('index'))
-    
-    return redirect(url_for('index'))
 
     params = {
         'client_id': UNTAPPD_CLIENT_ID,
