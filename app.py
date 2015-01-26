@@ -16,7 +16,7 @@ db = SQLAlchemy(app)
 
 # Models
 
-class User(db.Model):
+class user(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     untappd_id = db.Column(db.Integer, index=True)
     username = db.Column(db.String, index=True)
@@ -39,7 +39,7 @@ class User(db.Model):
             checkins.append(dict((col, getattr(checkin, col)) for col in checkin.__table__.columns.keys()))
         return checkins
 
-class CheckIn(db.Model):
+class checkin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     checkin_id = db.Column(db.Integer, index=True)
     name = db.Column(db.String)
@@ -101,33 +101,33 @@ def beers():
     untappd_id, username, user_avatar = r.json()[u'response'][u'user'][u'uid'], r.json()[u'response'][u'user'][u'user_name'], r.json()[u'response'][u'user'][u'user_avatar']
 
     # Check if user is in database
-    if not User.query.filter(User.untappd_id == untappd_id).all():
+    if not user.query.filter(user.untappd_id == untappd_id).all():
         print "User didn't exist"
         # Add user to database
-        user = User(untappd_id=untappd_id, username=username, user_avatar=user_avatar)
-        db.session.add(user)
+        cur_user = user(untappd_id=untappd_id, username=username, user_avatar=user_avatar)
+        db.session.add(cur_user)
         params = {'access_token': g.access_token, 'limit': 50, 'max_id': None}
         UNTAPPD_URL = "https://api.untappd.com/v4/user/checkins/"
         # Get as many checkins as possible
-        get_the_beers(user, params)
+        get_the_beers(cur_user, params)
     # If user is in database, check if we finished adding their beers
     else:
         print "User did exist"
-        user = User.query.filter(User.untappd_id == untappd_id).first()
-        if not user.updated:
+        cur_user = user.query.filter(user.untappd_id == untappd_id).first()
+        if not cur_user.updated:
             print "User was not updated"
             # Get the last checkin that was added to DB for that user
-            max_id = user.get_min()
+            max_id = cur_user.get_min()
             params = {'access_token': g.access_token, 'limit': 50, 'max_id': max_id}
-            get_the_beers(user, params)
+            get_the_beers(cur_user, params)
         # Get most recent checkin added for that user
-        since_id = user.get_max()
+        since_id = cur_user.get_max()
         params = {'access_token': g.access_token, 'limit': 50, 'since_id': since_id}
-        get_the_beers(user, params)
+        get_the_beers(cur_user, params)
     # Commit all DB changes
     db.session.commit()
 
-    return json.dumps(user.get_checkins())
+    return json.dumps(cur_user.get_checkins())
 
 @app.route('/login-beers')
 def test_beers():
@@ -162,7 +162,7 @@ def authorize():
     return redirect(url_for('index'))
 
 
-def get_the_beers(user, params):
+def get_the_beers(cur_user, params):
     UNTAPPD_URL = "https://api.untappd.com/v4/user/checkins/"
     while True:
         r = requests.get(UNTAPPD_URL, params = params)
@@ -180,12 +180,12 @@ def get_the_beers(user, params):
                                     style=beer[u'beer'][u'beer_style'],
                                     abv=beer[u'beer'][u'beer_abv'],
                                     brewer_country=beer[u'brewery'][u'country_name'],
-                                    author=user)
+                                    author=cur_user)
                 db.session.add(checkin)
 
         if r.json()[u'response'][u'checkins'][u'count'] < 50:
-            user.updated = True
-            db.session.add(user)
+            cur_user.updated = True
+            db.session.add(cur_user)
             break
 
     return None
