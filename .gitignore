@@ -2,3 +2,5 @@ _site
 .~lock.checkins.csv#
 *.pyc
 flask/
+db_repository/
+app.db
