@@ -30,7 +30,9 @@ if (document.getElementById("login")) {
 
 
 d3.json(url)
-    .on("error", function(e) { alert("You've ran out of API requests for the hour :("); })
+    .on("error", function(e) { 
+        alert("It took too long to get all of your checkins.  Try reloading in a minute or two."); 
+    })
     .on("load", function(data) {
     
     d3.select("#load").remove();

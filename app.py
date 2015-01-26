@@ -9,10 +9,13 @@ from untappd import UNTAPPD_CLIENT_ID, UNTAPPD_CLIENT_SECRET, UNTAPPD_REDIRECT_U
 # Init Flask App
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'I Like big beers'
+app.debug = True
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 app.config.from_object('config')
 db = SQLAlchemy(app)
+
+# Models
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -20,9 +23,22 @@ class User(db.Model):
     username = db.Column(db.String, index=True)
     user_avatar = db.Column(db.String)
     checkins = db.relationship('CheckIn', backref = 'author', lazy = 'dynamic')
+    updated = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return '<User %r>' % self.username
+
+    def get_min(self):
+        return min([checkin.checkin_id for checkin in self.checkins])
+
+    def get_max(self):
+        return max([checkin.checkin_id for checkin in self.checkins])
+
+    def get_checkins(self):
+        checkins = []
+        for checkin in self.checkins:
+            checkins.append(dict((col, getattr(checkin, col)) for col in checkin.__table__.columns.keys()))
+        return checkins
 
 class CheckIn(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -36,6 +52,8 @@ class CheckIn(db.Model):
 
     def __repr__(self):
         return '<CheckIn - %r>' % self.name
+
+# Views
 
 @app.before_request
 def load_access_token():
@@ -71,45 +89,46 @@ def beers():
     UNTAPPD_URL = "https://api.untappd.com/v4/user/info/"
     r = requests.get(UNTAPPD_URL, params = params)
 
+    if r.json()[u'meta'][u'code'] != 200:
+        error = {
+          "success": False,
+          "error": {
+            "code": 500,
+            "message": "Could not successfully call Untappd's API."
+          }
+        }
+        return json.dumps(error)
+
     untappd_id, username, user_avatar = r.json()[u'response'][u'user'][u'uid'], r.json()[u'response'][u'user'][u'user_name'], r.json()[u'response'][u'user'][u'user_avatar']
 
-    if not User.query.filter(User.untappd_id == untappd_id):
+    # Check if user is in database
+    if not User.query.filter_by(untappd_id=untappd_id).all():
+        print "User didn't exist"
         # Add user to database
         user = User(untappd_id=untappd_id, username=username, user_avatar=user_avatar)
         db.session.add(user)
+        params = {'access_token': g.access_token, 'limit': 50, 'max_id': None}
+        UNTAPPD_URL = "https://api.untappd.com/v4/user/checkins/"
+        # Get as many checkins as possible
+        get_the_beers(user, params)
+    # If user is in database, check if we finished adding their beers
+    else:
+        print "User did exist"
+        user = User.query.filter_by(untappd_id=untappd_id).first()
+        if not user.updated:
+            print "User was not updated"
+            # Get the last checkin that was added to DB for that user
+            max_id = user.get_min()
+            params = {'access_token': g.access_token, 'limit': 50, 'max_id': max_id}
+            get_the_beers(user, params)
+        # Get most recent checkin added for that user
+        since_id = user.get_max()
+        params = {'access_token': g.access_token, 'limit': 50, 'since_id': since_id}
+        get_the_beers(user, params)
+    # Commit all DB changes
+    db.session.commit()
 
-    params = {'access_token': g.access_token, 'limit': 50}
-    UNTAPPD_URL = "https://api.untappd.com/v4/user/checkins/"
-    beer_list_untappd = []
-    a = 0
-    while True:
-        if a > 49:
-            break
-        r = requests.get(UNTAPPD_URL, params = params)
-        if r.json()[u'response'][u'checkins'][u'count'] > 0:
-            beer_list_untappd += r.json()[u'response'][u'checkins'][u'items']
-        if r.json()[u'response'][u'checkins'][u'count'] < 50:
-            break
-        params['max_id'] = r.json()[u'response'][u'pagination'][u'max_id']
-        a += 1
-    beer_list = []
-    for beer_untappd in beer_list_untappd:
-        beer = {
-            'name': beer_untappd[u'beer'][u'beer_name'],
-            'brewery': beer_untappd[u'brewery'][u'brewery_name'],
-            'style': beer_untappd[u'beer'][u'beer_style'],
-            # 'ibu': beer_untappd[u'beer'][u'beer_ibu'],
-            'abv': beer_untappd[u'beer'][u'beer_abv'],
-            'brewer-country': beer_untappd[u'brewery'][u'country_name'], 
-        }
-        if beer_untappd[u'venue'] != []:
-            beer['venue-country'] = beer_untappd[u'venue'][u'location'][u'venue_country']
-            beer['venue-city'] = beer_untappd[u'venue'][u'location'][u'venue_city']
-        else:
-            beer['venue-country'] = None
-            beer['venue-city'] = None
-        beer_list.append(beer)
-    return json.dumps(beer_list)
+    return json.dumps(user.get_checkins())
 
 @app.route('/login-beers')
 def test_beers():
@@ -144,6 +163,33 @@ def authorize():
     return redirect(url_for('index'))
 
 
+def get_the_beers(user, params):
+    UNTAPPD_URL = "https://api.untappd.com/v4/user/checkins/"
+    while True:
+        r = requests.get(UNTAPPD_URL, params = params)
+        
+        if r.json()[u'meta'][u'code'] != 200:
+            break
+
+        if r.json()[u'response'][u'checkins'][u'count'] > 0:
+            beer_list = r.json()[u'response'][u'checkins'][u'items']
+            params['max_id'] = r.json()[u'response'][u'pagination'][u'max_id']
+            for beer in beer_list:
+                checkin = CheckIn(checkin_id=beer[u'checkin_id'],
+                                    name=beer[u'beer'][u'beer_name'],
+                                    brewery=beer[u'brewery'][u'brewery_name'],
+                                    style=beer[u'beer'][u'beer_style'],
+                                    abv=beer[u'beer'][u'beer_abv'],
+                                    brewer_country=beer[u'brewery'][u'country_name'],
+                                    author=user)
+                db.session.add(checkin)
+
+        if r.json()[u'response'][u'checkins'][u'count'] < 50:
+            user.updated = True
+            db.session.add(user)
+            break
+
+    return None
 
 if __name__ == '__main__':
     app.run()
