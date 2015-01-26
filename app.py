@@ -12,7 +12,6 @@ app.config['SECRET_KEY'] = 'I Like big beer'
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 app.config.from_object('config')
-app.debug = True
 db = SQLAlchemy(app)
 
 # Models
