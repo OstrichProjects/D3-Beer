@@ -8,6 +8,7 @@ from untappd import UNTAPPD_CLIENT_ID, UNTAPPD_CLIENT_SECRET, UNTAPPD_REDIRECT_U
 
 # Init Flask App
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'I Like big beer'
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 app.config.from_object('config')
@@ -27,10 +28,16 @@ class User(db.Model):
         return '<User %r>' % self.username
 
     def get_min(self):
-        return min([checkin.checkin_id for checkin in self.checkins])
+        try:
+            return min([checkin.checkin_id for checkin in self.checkins])
+        except ValueError:
+            return None
 
     def get_max(self):
-        return max([checkin.checkin_id for checkin in self.checkins])
+        try:
+            return max([checkin.checkin_id for checkin in self.checkins])
+        except ValueError:
+            return None
 
     def get_checkins(self):
         checkins = []
@@ -60,12 +67,18 @@ def load_access_token():
     else:
         access_token = None
 
+    if 'username' in session:
+        username = session['username']
+    else:
+        username = None
+
     g.access_token = access_token
+    g.username = username
 
 @app.route('/')
 def index():
     if g.access_token:
-        return render_template("index.html", access = g.access_token)
+        return render_template("index.html")
     else:
         return render_template("login.html")
 
@@ -82,26 +95,36 @@ def beers():
         }
         return json.dumps(error)
 
-    # Get User info, check if they are in DB, add them if not
-    params = {'access_token': g.access_token}
-    UNTAPPD_URL = "https://api.untappd.com/v4/user/info/"
-    r = requests.get(UNTAPPD_URL, params = params)
+    if not g.username:
 
-    if r.json()[u'meta'][u'code'] != 200:
-        error = {
-          "success": False,
-          "error": {
-            "code": 500,
-            "message": "Could not successfully call Untappd's API."
-          }
-        }
-        return json.dumps(r.json())
+        # Get User info, check if they are in DB, add them if not
+        params = {'access_token': g.access_token}
+        UNTAPPD_URL = "https://api.untappd.com/v4/user/info/"
+        r = requests.get(UNTAPPD_URL, params = params)
 
-    untappd_id, username, user_avatar = r.json()[u'response'][u'user'][u'uid'], r.json()[u'response'][u'user'][u'user_name'], r.json()[u'response'][u'user'][u'user_avatar']
+        if r.json()[u'meta'][u'code'] != 200:
+            error = {
+              "success": False,
+              "error": {
+                "code": 500,
+                "message": "Could not successfully call Untappd's API."
+              }
+            }
+            if r.json()[u'meta'][u'error_type'] == 'invalid_token':
+                return json.dumps({'redirect': '/login'})
+            else:
+                return json.dumps(error)
+
+        untappd_id, username, user_avatar = r.json()[u'response'][u'user'][u'uid'], r.json()[u'response'][u'user'][u'user_name'], r.json()[u'response'][u'user'][u'user_avatar']
+
+        session['username'] = username
+
+    else:
+        user = User.query.filter(User.username == g.username).first()
+        untappd_id, username = user.untappd_id, user.username
 
     # Check if user is in database
     if not User.query.filter(User.untappd_id == untappd_id).all():
-        print "User didn't exist"
         # Add user to database
         user = User(untappd_id=untappd_id, username=username, user_avatar=user_avatar)
         db.session.add(user)
@@ -111,10 +134,8 @@ def beers():
         get_the_beers(user, params)
     # If user is in database, check if we finished adding their beers
     else:
-        print "User did exist"
         user = User.query.filter(User.untappd_id == untappd_id).first()
         if not user.updated:
-            print "User was not updated"
             # Get the last checkin that was added to DB for that user
             max_id = user.get_min()
             params = {'access_token': g.access_token, 'limit': 50, 'max_id': max_id}
@@ -172,15 +193,20 @@ def get_the_beers(user, params):
         if r.json()[u'response'][u'checkins'][u'count'] > 0:
             beer_list = r.json()[u'response'][u'checkins'][u'items']
             params['max_id'] = r.json()[u'response'][u'pagination'][u'max_id']
+            a = 0
             for beer in beer_list:
-                checkin = CheckIn(checkin_id=beer[u'checkin_id'],
-                                    name=beer[u'beer'][u'beer_name'],
-                                    brewery=beer[u'brewery'][u'brewery_name'],
-                                    style=beer[u'beer'][u'beer_style'],
-                                    abv=beer[u'beer'][u'beer_abv'],
-                                    brewer_country=beer[u'brewery'][u'country_name'],
-                                    author=user)
-                db.session.add(checkin)
+                if not CheckIn.query.filter(CheckIn.checkin_id == beer[u'checkin_id']).all():
+                    checkin = CheckIn(checkin_id=beer[u'checkin_id'],
+                                        name=beer[u'beer'][u'beer_name'],
+                                        brewery=beer[u'brewery'][u'brewery_name'],
+                                        style=beer[u'beer'][u'beer_style'],
+                                        abv=beer[u'beer'][u'beer_abv'],
+                                        brewer_country=beer[u'brewery'][u'country_name'],
+                                        author=user)
+                    db.session.add(checkin)
+                    a = 1
+            if a == 0:
+                break
 
         if r.json()[u'response'][u'checkins'][u'count'] < 50:
             user.updated = True

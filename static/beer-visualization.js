@@ -34,8 +34,12 @@ d3.json(url)
         alert("It took too long to get all of your checkins.  Try reloading in a minute or two."); 
     })
     .on("load", function(data) {
-    
-    console.log(data);
+
+    if (data.hasOwnProperty('redirect')) {
+        window.location = '/login';
+    } else if (data.hasOwnProperty('error')) {
+        alert("Your account ran out of API calls for the hour or Untappd's API is down.  Please try again in an hour.");
+    }
 
     d3.select("#load").remove();
 
