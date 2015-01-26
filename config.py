@@ -1,5 +1,5 @@
 CSRF_ENABLED = True
-SECRET_KEY = 'fundees99'
+SECRET_KEY = 'SECRET_KEY'
 
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))

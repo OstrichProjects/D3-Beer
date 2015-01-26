@@ -8,7 +8,6 @@ from untappd import UNTAPPD_CLIENT_ID, UNTAPPD_CLIENT_SECRET, UNTAPPD_REDIRECT_U
 
 # Init Flask App
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'I Like big beer'
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 app.config.from_object('config')
