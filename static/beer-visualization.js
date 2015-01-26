@@ -35,6 +35,8 @@ d3.json(url)
     })
     .on("load", function(data) {
     
+    console.log(data);
+
     d3.select("#load").remove();
 
     d3.selectAll(".view").on('click', function(){

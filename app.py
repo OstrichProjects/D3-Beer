@@ -12,6 +12,7 @@ app.config['SECRET_KEY'] = 'I Like big beer'
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 app.config.from_object('config')
+app.debug = True
 db = SQLAlchemy(app)
 
 # Models
@@ -96,12 +97,12 @@ def beers():
             "message": "Could not successfully call Untappd's API."
           }
         }
-        return json.dumps(error)
+        return json.dumps(r.json())
 
     untappd_id, username, user_avatar = r.json()[u'response'][u'user'][u'uid'], r.json()[u'response'][u'user'][u'user_name'], r.json()[u'response'][u'user'][u'user_avatar']
 
     # Check if user is in database
-    if not User.query.filter_by(untappd_id=untappd_id).all():
+    if not User.query.filter(User.untappd_id == untappd_id).all():
         print "User didn't exist"
         # Add user to database
         user = User(untappd_id=untappd_id, username=username, user_avatar=user_avatar)
@@ -113,7 +114,7 @@ def beers():
     # If user is in database, check if we finished adding their beers
     else:
         print "User did exist"
-        user = User.query.filter_by(untappd_id=untappd_id).first()
+        user = User.query.filter(User.untappd_id == untappd_id).first()
         if not user.updated:
             print "User was not updated"
             # Get the last checkin that was added to DB for that user
