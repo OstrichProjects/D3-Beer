@@ -17,14 +17,12 @@
   <div id="layout">
     <a href="https://github.com/OstrichProjects/D3-Beer"><img style="position: absolute; top: 0px; right: 0px; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_black_ff7600.png"></a>
 
-    <h1>D3 Beer</h1>
+    <h1><a href='/' id="home-link">D3 Beer</a></h1>
     <p>Visualize your beer checkins from Untappd!</p>
     <p>Forked from <a href="http://blog.pezholio.co.uk/beer-goggles/" target="_blank">Pezholio</a></p>
-    <div id="share-links">
-      <iframe id="fb-share" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowTransparency="true"></iframe>
-      <iframe id="twitter-share" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-hashtag-button twitter-tweet-button twitter-hashtag-button twitter-count-none" title="Twitter Tweet Button" data-twttr-rendered="true" style="width: 57px; height: 20px;"></iframe>
+    <div id="user-info">
+      <a href="https://untappd.com/user/{{ username }}" target="_blank"><img id="avatar" src="{{ avatar }}" /><span id="username">{{ username }}'s Untappd</span></a>
     </div>
-    <div id="perm-link">Shareable URL: </div>
     <h2>View by</h2>
     <div class="select">
       <span><button class="view active" value="style">Style</button></span>

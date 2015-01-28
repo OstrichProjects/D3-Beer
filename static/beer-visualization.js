@@ -22,9 +22,14 @@ var label = d3.select("#vis").append("div")
     .attr("class", "label")
     .style("opacity", 0);
 
+var href = window.location.href.split('/');
+
 if (document.getElementById("login")) {
     var url = "/login-beers";
-} else {
+} else if (href[href.length-2] == "user") {
+    var url = "/beers?username=" + href[href.length-1];
+}
+else {
     var url = "/beers";
 }
 
@@ -39,6 +44,20 @@ d3.json(url)
         window.location = '/login';
     } else if (data.hasOwnProperty('error')) {
         alert("Your account ran out of API calls for the hour or Untappd's API is down.  Please try again in an hour.");
+    }
+
+    if (document.getElementById("share-links")) {
+        var username = data[0].username;
+        // Add Social Links
+        var share_url = "http://d3-beer.jonost.me/user/" + username;
+        var encode_share_url = encodeURIComponent(share_url);
+        var fb_share = "https://www.facebook.com/plugins/share_button.php?layout=button&appId=250982388421083&href=" + encode_share_url;
+        var tw_share = "http://platform.twitter.com/widgets/tweet_button.b68aed79dd9ad79554bcd8c9141c94c8.en.html#_=1422402697379&amp;count=none&amp;dnt=false&amp;id=twitter-share&amp;lang=en&amp;original_referer=" + encode_share_url + "&amp;share_with_retweet=never&amp;size=m&amp;type=hashtag"
+
+        d3.select('iframe#fb-share').property('src', fb_share);
+        d3.select('iframe#twitter-share').property('src', tw_share);
+        d3.select('#perm-link').append('a').attr('href', share_url).text(share_url);
+
     }
 
     d3.select("#load").remove();
@@ -87,7 +106,7 @@ d3.json(url)
                 .filter(function(c) { return c != null })
                 .sort(function(a,b) { return b.value - a.value });
 
-            if (Object.keys(checkins).length > 19) {
+            if (Object.keys(checkins).length > 29) {
                 cutoff += 1
             } else { break; }
         }

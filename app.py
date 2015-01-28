@@ -8,7 +8,6 @@ from untappd import UNTAPPD_CLIENT_ID, UNTAPPD_CLIENT_SECRET, UNTAPPD_REDIRECT_U
 
 # Init Flask App
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'I Like big beer'
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 app.config.from_object('config')
@@ -43,6 +42,7 @@ class User(db.Model):
         checkins = []
         for checkin in self.checkins:
             checkins.append(dict((col, getattr(checkin, col)) for col in checkin.__table__.columns.keys()))
+        checkins[0]['username'] = self.username
         return checkins
 
 class CheckIn(db.Model):
@@ -82,8 +82,20 @@ def index():
     else:
         return render_template("login.html")
 
+@app.route('/user/<username>')
+def user_specific(username):
+    if User.query.filter(User.username == username).all():
+        avatar = User.query.filter(User.username == username).first().user_avatar
+        return render_template("view.html", username=username, avatar=avatar)
+    else:
+        return redirect(url_for('index'))
+
 @app.route('/beers')
 def beers():
+    if request.args.get("username"):
+        user = User.query.filter(User.username == request.args.get("username")).first()
+        return json.dumps(user.get_checkins())
+
     # If their access token is not present then return an error
     if not g.access_token:
         error = {
@@ -96,7 +108,6 @@ def beers():
         return json.dumps(error)
 
     if not g.username:
-
         # Get User info, check if they are in DB, add them if not
         params = {'access_token': g.access_token}
         UNTAPPD_URL = "https://api.untappd.com/v4/user/info/"
@@ -128,6 +139,7 @@ def beers():
         # Add user to database
         user = User(untappd_id=untappd_id, username=username, user_avatar=user_avatar)
         db.session.add(user)
+        db.session.commit()
         params = {'access_token': g.access_token, 'limit': 50, 'max_id': None}
         UNTAPPD_URL = "https://api.untappd.com/v4/user/checkins/"
         # Get as many checkins as possible
@@ -204,6 +216,7 @@ def get_the_beers(user, params):
                                         brewer_country=beer[u'brewery'][u'country_name'],
                                         author=user)
                     db.session.add(checkin)
+                    db.session.commit()
                     a = 1
             if a == 0:
                 break
@@ -211,6 +224,7 @@ def get_the_beers(user, params):
         if r.json()[u'response'][u'checkins'][u'count'] < 50:
             user.updated = True
             db.session.add(user)
+            db.session.commit()
             break
 
     return None
